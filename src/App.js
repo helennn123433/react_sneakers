@@ -1,6 +1,20 @@
 function App() {
   return (
     <div className ="App">
+
+      <div className="overlay">
+        <div className="drawer">
+          <h2>Корзина</h2>
+          <div className="cartItem">
+            <img width={70} height={70}  src="/img/sneakers/image 5.jpg" alt="product1" />
+            <div className="cardItem">
+              <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
+              <b>12 999 руб.</b>
+            </div>
+            <img className="removeBtn" src="/img/delete.svg" alt="delete" />
+          </div>
+        </div>
+      </div>
       <header>
       <div className="headerLeft">
         <div className="headerLeftImg">
@@ -24,10 +38,17 @@ function App() {
         </div>
       </header>
      <div className="content">
-      <h1>Все кроссовки</h1>
+      <div className="content-search">
+        <h1>Все кроссовки</h1>
+        <div className="search-block">
+          <img src="/img/search.svg" alt="search" />
+          <input placeholder="Поиск..."/>
+        </div>
+      </div>
       <div className="sneakers">
         <div className="card">
         <div className="cardImageContainer">
+          <div className="favorite"><img src="/img/heartunlike.svg" alt="heart" /></div>
           <img width={133} height={112} src="/img/sneakers/image 5.jpg" alt="sneakers" />
         </div>
           <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
