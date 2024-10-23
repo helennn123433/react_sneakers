@@ -5,14 +5,37 @@ function App() {
       <div className="overlay">
         <div className="drawer">
           <h2>Корзина</h2>
+          <div className="items">
           <div className="cartItem">
-            <img width={70} height={70}  src="/img/sneakers/image 5.jpg" alt="product1" />
+            <div style={{ backgroundImage: 'url(/img/sneakers/image_5.jpg)' }} className="cartItemImg"></div>
             <div className="cardItem">
               <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
               <b>12 999 руб.</b>
             </div>
             <img className="removeBtn" src="/img/delete.svg" alt="delete" />
           </div>
+          <div className="cartItem">
+            <div style={{ backgroundImage: 'url(/img/sneakers/image_5.jpg)' }} className="cartItemImg"></div>
+            <div className="cardItem">
+              <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
+              <b>12 999 руб.</b>
+            </div>
+            <img className="removeBtn" src="/img/delete.svg" alt="delete" />
+          </div>
+          </div>
+          <ul className="infoPrices">
+            <li className="infoPrice">
+              <span>Итого:</span>
+              <div></div>
+              <b>21 498 руб.</b>
+            </li>
+            <li className="infoPrice">
+              <span>Налог 5%:</span>
+              <div></div>
+              <b>1074 руб</b>
+            </li>
+          </ul>
+          <button className="greenButton">Оформить заказ <img src="/img/arrow.svg" alt="arrowInButton" /></button>
         </div>
       </div>
       <header>
@@ -49,7 +72,7 @@ function App() {
         <div className="card">
         <div className="cardImageContainer">
           <div className="favorite"><img src="/img/heartunlike.svg" alt="heart" /></div>
-          <img width={133} height={112} src="/img/sneakers/image 5.jpg" alt="sneakers" />
+          <img width={133} height={112} src="/img/sneakers/image_5.jpg" alt="sneakers" />
         </div>
           <h5>Мужские Кроссовки Nike Blazer Mid Suede</h5>
           <div className="cardBottom">

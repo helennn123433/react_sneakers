@@ -156,7 +156,7 @@ header{
   z-index: 1;
   .drawer{
     position: absolute;
-    width: 385px;
+    width: 420px;
     right: 0;
     height: 100%;
     background: #ffffff;
@@ -165,18 +165,39 @@ header{
 
     h2{
       margin: 0;
+      margin-bottom: 20px;
+    }
+    .greenButton{
+      img{
+        margin-left: 40px;
+      }
     }
   }
 }
 
 .cartItem{
+  border: 1px solid #f3f3f3;
+  border-radius: 20px;
+  overflow: hidden;
   display: flex;
   align-items: center;
+  padding: 10px 20px;
+  margin-bottom: 20px;
+
+  .cartItemImg{
+    height: 70px;
+    width: 100px;
+    background-size: contain;
+    background-position: 0 10px;
+    background-repeat: no-repeat;
+    margin-right: 20px;
+  }
+ 
   img{
     margin-right: 20px;
   }
   p{
-    margin-bottom: 5px;
+    margin: 0;
     font-size: 16px;
   }
   b{
@@ -195,5 +216,41 @@ header{
     margin-right: 20px;
   }
 }
+.infoPrices{
+  display: block;
+  margin-bottom: 40px !important;
+  list-style: none;
+  padding: 0;
+  div{
+    flex: 1;
+    height: 1px;
+    border-bottom: 1px dashed #DFDFDF;
+    position: relative;
+    top: -4px;
+    margin: 0 7px;
+  }
+  .infoPrice{
+    display: flex;
+    align-items: flex-end;
+    margin-bottom: 20px;
+  }
+}
 
-
+.greenButton{
+  width: 100%;
+  background: #9DD558;
+  border-radius: 18px;
+  border: none;
+  height: 55px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  transition: background 0.2s ease-in-out;
+  &:hover{
+    background: rgba(#9DD558, 70%);
+  }
+  &:active{
+    background: darken(#9DD558, 5%);
+  }
+}
