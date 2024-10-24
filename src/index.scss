@@ -163,13 +163,30 @@ header{
     box-shadow: -10px 4px 24px rgba(0, 0, 0, 0.01);
     padding: 30px;
 
+    .items{
+      overflow: auto;
+      margin-bottom: 40px;
+      flex: 1;
+    }
     h2{
+      display: flex;
+      justify-content: space-between;
       margin: 0;
       margin-bottom: 20px;
+
+      img{
+        cursor: pointer;
+      }
     }
     .greenButton{
       img{
-        margin-left: 40px;
+        transition: transform 0.2s ease-in-out;
+        margin-left: 20px;
+      }
+      &:hover{
+        img{
+          transform: translateX(5px);
+        }
       }
     }
   }
