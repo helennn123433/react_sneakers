@@ -1,15 +1,22 @@
-import Card from './components/Card.jsx'
+import Card from './components/Card'
 import Drawer from './components/Drawer.jsx';
 import Header from './components/Header.jsx';
 
 const arr = [
   {
-    name: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: 12999
+    title: "Мужские Кроссовки Nike Blazer Mid Suede",
+    price: 12999,
+    imageUrl: '/img/sneakers/image_5.jpg'
   },
   {
-    name: "Мужские Кроссовки Nike Air Max 270",
-    price: 15600
+    title: "Мужские Кроссовки Nike Air Max 270",
+    price: 15600,
+    imageUrl: '/img/sneakers/image2.jpg'
+  },
+  {
+    title: "Кроссовки Puma X Aka Boku Future Rider",
+    price: 8999,
+    imageUrl: '/img/sneakers/image4.png'
   }
 ]
 
@@ -31,7 +38,12 @@ function App() {
         </div>
       </div>
       <div className="sneakers">
-      <Card title="Мужские Кроссовки Nike Blazer Mid Suede" price={12999} imageUrl="/img/sneakers/image_5.jpg" />
+        {arr.map((obj) => (
+          <Card 
+            title={obj.title}
+            price={obj.price} 
+            imageUrl={obj.imageUrl} />
+        ))}
       </div>
      </div>
     </div>
