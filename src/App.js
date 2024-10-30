@@ -1,3 +1,4 @@
+import React, { useState } from 'react';
 import Card from './components/Card'
 import Drawer from './components/Drawer.jsx';
 import Header from './components/Header.jsx';
@@ -22,9 +23,22 @@ const arr = [
 
 
 function App() {
+  const [count, setCount] = useState(0);
+  const plus = () => {
+    setCount(count + 1);
+  }
+
+  const minus = () =>{
+    setCount(count - 1);
+  }
+
   return (
     <div className ="App">
-
+      <div>
+        <h1>{count}</h1>
+        <button onClick={plus}>+</button>
+        <button onClick={minus}>-</button>
+      </div>
       <div style={{ display: 'none' }} className="overlay">
         <Drawer/>
       </div>
@@ -42,7 +56,9 @@ function App() {
           <Card 
             title={obj.title}
             price={obj.price} 
-            imageUrl={obj.imageUrl} />
+            imageUrl={obj.imageUrl} 
+            onClickPlus ={() => alert('Goodbue')}
+           />
         ))}
       </div>
      </div>
