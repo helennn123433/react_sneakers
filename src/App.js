@@ -1,48 +1,39 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Card from './components/Card'
 import Drawer from './components/Drawer.jsx';
 import Header from './components/Header.jsx';
 
-const arr = [
-  {
-    title: "Мужские Кроссовки Nike Blazer Mid Suede",
-    price: 12999,
-    imageUrl: '/img/sneakers/image_5.jpg'
-  },
-  {
-    title: "Мужские Кроссовки Nike Air Max 270",
-    price: 15600,
-    imageUrl: '/img/sneakers/image2.jpg'
-  },
-  {
-    title: "Кроссовки Puma X Aka Boku Future Rider",
-    price: 8999,
-    imageUrl: '/img/sneakers/image4.png'
-  }
-]
-
-
 function App() {
-  const [count, setCount] = useState(0);
-  const plus = () => {
-    setCount(count + 1);
-  }
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([
+    {
+      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
+      "price": 12999,
+      "imageUrl": "/img/sneakers/image_5.jpg"
+    },
+    {
+      "title": "Мужские Кроссовки Nike Air Max 270",
+      "price": 15600,
+      "imageUrl": "/img/sneakers/image2.jpg"
+    }
+  ]);
+  const [cartOpened, setCartOpened] = useState(false);
 
-  const minus = () =>{
-    setCount(count - 1);
-  }
-
+  useEffect(() =>{
+    fetch(`https://6723b460493fac3cf24bf9e2.mockapi.io/items`).then(responce => {
+      return responce.json();
+    }).then(json => {
+      setItems(json);
+    })
+  }, [])
+  
   return (
     <div className ="App">
-      <div>
-        <h1>{count}</h1>
-        <button onClick={plus}>+</button>
-        <button onClick={minus}>-</button>
-      </div>
-      <div style={{ display: 'none' }} className="overlay">
-        <Drawer/>
-      </div>
-      <Header />
+       {cartOpened && <Drawer 
+       items={cartItems}
+       onClose = {() => setCartOpened(false)} />} 
+      <Header 
+      onClickCart = {() => setCartOpened(true)}/>
      <div className="content">
       <div className="content-search">
         <h1>Все кроссовки</h1>
@@ -52,12 +43,11 @@ function App() {
         </div>
       </div>
       <div className="sneakers">
-        {arr.map((obj) => (
+        {items.map((obj) => (
           <Card 
             title={obj.title}
             price={obj.price} 
             imageUrl={obj.imageUrl} 
-            onClickPlus ={() => alert('Goodbue')}
            />
         ))}
       </div>

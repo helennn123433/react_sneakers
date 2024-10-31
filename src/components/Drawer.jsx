@@ -1,24 +1,19 @@
-function Drawer(){
+function Drawer({onClose, items = []}){
     return (
+      <div className="overlay">
         <div className="drawer">
-          <h2>Корзина <img className="removeBtn" src="/img/delete.svg" alt="delete" /></h2>
+          <h2>Корзина <img onClick={onClose} className="removeBtn" src="/img/delete.svg" alt="delete" /></h2>
           <div className="items">
-          <div className="cartItem">
-            <div style={{ backgroundImage: 'url(/img/sneakers/image_5.jpg)' }} className="cartItemImg"></div>
+          {items.map((obj) => (
+            <div className="cartItem">
+            <div style={{ backgroundImage: `url(${obj.imageUrl})` }} className="cartItemImg"></div>
             <div className="cardItem">
-              <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <b>12 999 руб.</b>
+              <p>{obj.title}</p>
+              <b>{obj.price} руб.</b>
             </div>
             <img className="removeBtn" src="/img/delete.svg" alt="delete" />
           </div>
-          <div className="cartItem">
-            <div style={{ backgroundImage: 'url(/img/sneakers/image_5.jpg)' }} className="cartItemImg"></div>
-            <div className="cardItem">
-              <p>Мужские Кроссовки Nike Blazer Mid Suede</p>
-              <b>12 999 руб.</b>
-            </div>
-            <img className="removeBtn" src="/img/delete.svg" alt="delete" />
-          </div>
+          ))}
           </div>
           <ul className="infoPrices">
             <li className="infoPrice">
@@ -33,6 +28,7 @@ function Drawer(){
             </li>
           </ul>
           <button className="greenButton">Оформить заказ <img src="/img/arrow.svg" alt="arrowInButton" /></button>
+        </div>
         </div>
     )
 }
