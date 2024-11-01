@@ -1,30 +1,56 @@
+import React, { useState, useEffect } from 'react';
+import Card from './components/Card'
+import Drawer from './components/Drawer.jsx';
+import Header from './components/Header.jsx';
+
 function App() {
+  const [items, setItems] = useState([]);
+  const [cartItems, setCartItems] = useState([
+    {
+      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
+      "price": 12999,
+      "imageUrl": "/img/sneakers/image_5.jpg"
+    },
+    {
+      "title": "Мужские Кроссовки Nike Air Max 270",
+      "price": 15600,
+      "imageUrl": "/img/sneakers/image2.jpg"
+    }
+  ]);
+  const [cartOpened, setCartOpened] = useState(false);
+
+  useEffect(() =>{
+    fetch(`https://6723b460493fac3cf24bf9e2.mockapi.io/items`).then(responce => {
+      return responce.json();
+    }).then(json => {
+      setItems(json);
+    })
+  }, [])
+  
   return (
     <div className ="App">
-      <header>
-      <div className="headerLeft">
-      <img width={40} height={40} src="/img/logo.png" />
-        <div className="headerLeftInfo">
-          <h3>React Sneakers</h3>
-          <p>Магазин лучших кроссовок</p>
+       {cartOpened && <Drawer 
+       items={cartItems}
+       onClose = {() => setCartOpened(false)} />} 
+      <Header 
+      onClickCart = {() => setCartOpened(true)}/>
+     <div className="content">
+      <div className="content-search">
+        <h1>Все кроссовки</h1>
+        <div className="search-block">
+          <img src="/img/search.svg" alt="search" />
+          <input placeholder="Поиск..."/>
         </div>
       </div>
-
-        <div>
-          <ul className="headerRigth">
-            <li>
-              <img width={18} height={18} src="/img/cart.svg" />
-              <span>1205 руб.</span>
-            </li>
-            <li>
-            <img width={18} height={18} src="/img/user.svg" />
-            </li>
-          </ul>
-        </div>
-      </header>
-     <div className="content">
-      <h1>Все кроссовки</h1>
-      ....
+      <div className="sneakers">
+        {items.map((obj) => (
+          <Card 
+            title={obj.title}
+            price={obj.price} 
+            imageUrl={obj.imageUrl} 
+           />
+        ))}
+      </div>
      </div>
     </div>
   );
