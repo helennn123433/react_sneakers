@@ -5,18 +5,7 @@ import Header from './components/Header.jsx';
 
 function App() {
   const [items, setItems] = useState([]);
-  const [cartItems, setCartItems] = useState([
-    {
-      "title": "Мужские Кроссовки Nike Blazer Mid Suede",
-      "price": 12999,
-      "imageUrl": "/img/sneakers/image_5.jpg"
-    },
-    {
-      "title": "Мужские Кроссовки Nike Air Max 270",
-      "price": 15600,
-      "imageUrl": "/img/sneakers/image2.jpg"
-    }
-  ]);
+  const [cartItems, setCartItems] = useState([]);
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() =>{
@@ -26,7 +15,9 @@ function App() {
       setItems(json);
     })
   }, [])
-  
+   const onAddToCart = (obj) =>{
+    setCartItems(prev => [...prev, obj]);
+   }
   return (
     <div className ="App">
        {cartOpened && <Drawer 
@@ -43,11 +34,12 @@ function App() {
         </div>
       </div>
       <div className="sneakers">
-        {items.map((obj) => (
+        {items.map((item) => (
           <Card 
-            title={obj.title}
-            price={obj.price} 
-            imageUrl={obj.imageUrl} 
+            title={item.title}
+            price={item.price} 
+            imageUrl={item.imageUrl} 
+            onPlus = {(obj) => onAddToCart(obj)}
            />
         ))}
       </div>
