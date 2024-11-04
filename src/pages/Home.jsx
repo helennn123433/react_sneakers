@@ -1,5 +1,5 @@
 import Card from "../components/Card";
-function Home(){
+function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToCart, onFavorite}){
   return (
     <div className="content">
         <div className="content-search">
@@ -9,18 +9,13 @@ function Home(){
           <div className="search-block">
             <img src="/img/search.svg" alt="search" />
             {searchValue && (
-              <img
-                onClick={() => setSearchValue("")}
+              <img onClick={() => setSearchValue("")}
                 className="search_btn removeBtn"
                 src="/img/delete.svg"
                 alt="delete"
               />
             )}
-            <input
-              onChange={onChangeSearchInput}
-              value={searchValue}
-              placeholder="Поиск..."
-            />
+            <input onChange={onChangeSearchInput} value={searchValue} placeholder="Поиск..."/>
           </div>
         </div>
         <div className="sneakers">

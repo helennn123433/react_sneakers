@@ -4,6 +4,7 @@ import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.jsx";
 import Drawer from "./components/Drawer.jsx";
 import Header from "./components/Header.jsx";
+import Favorites from "./pages/Favorites.jsx";
 
 function App() {
   const [items, setItems] = useState([]);
@@ -13,38 +14,50 @@ function App() {
   const [cartOpened, setCartOpened] = useState(false);
 
   useEffect(() => {
-    axios.get(`https://6723b460493fac3cf24bf9e2.mockapi.io/items`).then(responce => {
-      setItems(responce.data);
-    });
-    axios.get(`https://6723b460493fac3cf24bf9e2.mockapi.io/cart`).then(responce => {
-      setCartItems(responce.data);
-    })
+    const fetchItems = async () => {
+      try {
+        const response = await axios.get(`https://6723b460493fac3cf24bf9e2.mockapi.io/items`);
+        setItems(response.data);
+      } catch (error) {
+        console.error("Error fetching items:", error);
+      }
+    };
+
+    const fetchCartItems = async () => {
+      try {
+        const response = await axios.get(`https://6723b460493fac3cf24bf9e2.mockapi.io/cart`);
+        setCartItems(response.data);
+      } catch (error) {
+        console.error("Error fetching cart items:", error);
+      }
+    };
+
+    fetchItems();
+    fetchCartItems();
   }, []);
-  const onAddToCart = (obj) => {
-    axios.post(`https://6723b460493fac3cf24bf9e2.mockapi.io/cart`, obj)
+  const onAddToCart = async (obj) => {
+    await axios.post(`https://6723b460493fac3cf24bf9e2.mockapi.io/cart`, obj)
      setCartItems((prev) => [...prev, obj]);
   };
-  const onRemoveItem = (id) => {
-    axios.delete(`https://6723b460493fac3cf24bf9e2.mockapi.io/cart/${id}`)
+  const onRemoveItem = async (id) => {
+   await axios.delete(`https://6723b460493fac3cf24bf9e2.mockapi.io/cart/${id}`)
     setCartItems((prev) => prev.filter(item => item.id !== id));
 }
   const onChangeSearchInput = (event) => {
     setSearchValue(event.target.value);
   };
+
   const onFavorite = (obj) => {
-    setFavoriteItems((prev) => [...prev, obj]);
+    const itemIndex = favoriteItems.findIndex(item => item.price === obj.price);
+    if (itemIndex !== -1) {
+      setFavoriteItems((prev) => prev.filter((_, index) => index !== itemIndex));
+    } else {
+      setFavoriteItems((prev) => [...prev, obj]);
+    }
   };
+
   return (
     <div className="App">
-      <Routes>
-        <Route path='/favorites' element={
-          <div>
-            {favoriteItems.map((obj) => (
-              <h1>{obj.title}</h1>
-            ))}
-          </div>
-        } />
-      </Routes>
       {cartOpened && (
         <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} />
       )}
@@ -60,8 +73,15 @@ function App() {
           onFavorite={onFavorite}
           />
         }>
-
         </Route>
+      </Routes>
+
+      <Routes>
+        <Route path='/favorites' element={
+          <div> 
+            <Favorites items={favoriteItems} onFavorite={onFavorite} />
+          </div>
+        } />
       </Routes>
     </div>
   );

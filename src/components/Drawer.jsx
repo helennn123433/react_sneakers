@@ -39,9 +39,6 @@ function Drawer({onClose, items = [], onRemove}){
               <img src="/img/arrow.svg" alt="arrow" /> Вернуться назад
             </button>
           </div>}
-          
-          
-          
         </div>
         </div>
     )
