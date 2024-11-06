@@ -1,5 +1,5 @@
 import Card from "../components/Card";
-function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToCart, onFavorite}){
+function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToCart, onFavorite, cartItems}){
   return (
     <div className="content">
         <div className="content-search">
@@ -31,6 +31,7 @@ function Home({items, searchValue, setSearchValue, onChangeSearchInput, onAddToC
                 imageUrl={item.imageUrl}
                 onPlus={(obj) => onAddToCart(obj)}
                 onAddFavorite={(obj) => onFavorite(obj)}
+                added={cartItems.some(obj => obj.price === item.price)}
               />
             ))}
         </div>
