@@ -6,6 +6,9 @@ import Drawer from "./components/Drawer.jsx";
 import Header from "./components/Header.jsx";
 import Favorites from "./pages/Favorites.jsx";
 
+
+export const AppContext = React.createContext({});
+
 function App() {
   const [items, setItems] = useState([]);
   const [cartItems, setCartItems] = useState([]);
@@ -57,7 +60,8 @@ function App() {
   };
 
   return (
-    <div className="App">
+    <AppContext.Provider value={{items, cartItems, favoriteItems }}>
+      <div className="App">
       {cartOpened && (
         <Drawer items={cartItems} onClose={() => setCartOpened(false)} onRemove={onRemoveItem} />
       )}
@@ -81,11 +85,12 @@ function App() {
       <Routes>
         <Route path='/favorites' element={
           <div> 
-            <Favorites items={favoriteItems} onFavorite={onFavorite} />
+            <Favorites onFavorite={onFavorite} />
           </div>
         } />
       </Routes>
     </div>
+    </AppContext.Provider>
   );
 }
 
